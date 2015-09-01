@@ -103,13 +103,21 @@ public class AudioHandler extends CordovaPlugin {
         }
         else if (action.equals("stopPlayingAudio")) {
             this.stopPlayingAudio(args.getString(0));
-        } else if (action.equals("setVolume")) {
+        }
+        else if (action.equals("setVolume"))
+        {
            try {
                this.setVolume(args.getString(0), Float.parseFloat(args.getString(1)));
            } catch (NumberFormatException nfe) {
                //no-op
            }
-        } else if (action.equals("getCurrentPositionAudio")) {
+        }
+        else if(action.equals("getAudioOutputDevice")) {
+            float f = this.getAudioOutputDevice();
+            callbackContext.sendPluginResult(new PluginResult(status, f));
+            return true;
+        }
+        else if (action.equals("getCurrentPositionAudio")) {
             float f = this.getCurrentPositionAudio(args.getString(0));
             callbackContext.sendPluginResult(new PluginResult(status, f));
             return true;
